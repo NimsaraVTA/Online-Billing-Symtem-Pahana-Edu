@@ -4,131 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome | Pahana Edu Billing System</title>
+  
+  <!-- Link your custom CSS -->
+  <link rel="stylesheet" href="CSS/index.css">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f0f2f5;
-    }
-
-    .main-container {
-      display: flex;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-
-    .left-section {
-      flex: 1;
-      background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1050&q=80') no-repeat center center;
-      background-size: cover;
-    }
-
-    .right-section {
-      flex: 1;
-      background-color: #f5f7fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      animation: fadeInRight 1s ease-in-out;
-    }
-
-    .login-box {
-      width: 100%;
-      max-width: 480px;
-      border: 1px solid #d0d0d0;
-      border-radius: 16px;
-      padding: 45px 35px;
-      background-color: #ffffff;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      animation: slideUp 1s ease-in-out;
-    }
-
-    .login-box h2 {
-      font-weight: 600;
-      color: #1a237e;
-      margin-bottom: 20px;
-    }
-
-    .form-control {
-      border-radius: 8px;
-      padding: 12px;
-    }
-
-    .btn-primary {
-      background-color: #1a237e;
-      border-color: #1a237e;
-      border-radius: 8px;
-      padding: 12px;
-    }
-
-    .btn-primary:hover {
-      background-color: #0d1b60;
-    }
-
-    .form-text {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .signup-link {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .signup-link a {
-      color: #0d47a1;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .signup-link a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .main-container {
-        flex-direction: column;
-      }
-
-      .left-section {
-        height: 220px;
-      }
-
-      .login-box {
-        padding: 30px 25px;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -137,7 +20,7 @@
   <div class="left-section"></div>
 
   <!-- Right Login Section -->
-  <div class="right-section">
+  <div class="right-section d-flex flex-column justify-content-center align-items-center">
     <div class="login-box">
       <h2>Welcome to Pahana Edu</h2>
       <p class="form-text mb-4">Please login to access the billing system</p>
@@ -159,10 +42,80 @@
         </div>
       </form>
     </div>
+
+    <!-- Footer at the bottom of the right panel -->
+    <div class="right-footer text-center mt-auto py-3">
+      <small>&copy; 2025 Thathsarani Bandara | University ID: 23567. All rights reserved.</small>
+    </div>
   </div>
 </div>
 
-<!-- Bootstrap JS Bundle -->
+<!-- Chatbot UI -->
+<div id="chatbot" class="chatbot">
+  <div class="chatbot-header" onclick="toggleChat()">💬 Need Help?</div>
+  <div class="chatbot-body" id="chatBody">
+    <div class="bot-msg">Hi! I'm here to help. Ask me something like:<br>
+      - How to sign up?<br>
+      - What is this system?<br>
+      - Forgot password?</div>
+  </div>
+  <div class="chatbot-footer">
+    <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKey(event)">
+    <button onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+  function toggleChat() {
+    const body = document.getElementById('chatBody');
+    const footer = document.querySelector('.chatbot-footer');
+    const isVisible = body.style.display === 'block';
+    body.style.display = isVisible ? 'none' : 'block';
+    footer.style.display = isVisible ? 'none' : 'flex';
+  }
+
+  function sendMsg() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const chatBody = document.getElementById('chatBody');
+
+    // Display user's message
+    const userDiv = document.createElement('div');
+    userDiv.className = 'user-msg';
+    userDiv.innerText = msg;
+    chatBody.appendChild(userDiv);
+
+    // Bot response
+    const botDiv = document.createElement('div');
+    botDiv.className = 'bot-msg';
+    botDiv.innerText = getBotResponse(msg);
+    chatBody.appendChild(botDiv);
+
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function handleKey(event) {
+    if (event.key === 'Enter') {
+      sendMsg();
+    }
+  }
+
+  function getBotResponse(input) {
+    input = input.toLowerCase();
+    if (input.includes('hi')) return "Hello! How can I help you?";
+    if (input.includes('sign up')) return "To sign up, click on the 'Sign up here' link below the login form.";
+    if (input.includes('system')) return "This is an online billing system for Pahana Edu bookshop.";
+    if (input.includes('forgot')) return "Please contact admin or click 'Forgot Password' (feature coming soon).";
+    return "Sorry, I didn't understand. Try asking about 'sign up' or 'forgot password'.";
+  }
+</script>
+
+<!-- Bootstrap Bundle JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

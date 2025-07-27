@@ -1,3 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,15 +36,29 @@
     <div class="login-box mx-auto">
       <h2>Welcome to Pahana Edu</h2>
       <p class="form-text mb-4">Please login to access the billing system</p>
-      <form action="dashboard.html" method="post">
+      
+      <!-- Show server-side error message -->
+      <% String errorMsg = (String) request.getAttribute("error"); %>
+      <% if (errorMsg != null) { %>
+        <p style="color: red; font-weight: bold; text-align: center;"><%= errorMsg %></p>
+      <% } %>
+
+      <form action="login" method="post">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+          <%
+            Boolean highlightError = (Boolean) request.getAttribute("highlightError");
+            String borderStyle = (highlightError != null && highlightError) ? "border: 1px solid red;" : "";
+          %>
+
+          <input type="text" class="form-control" id="username" name="username" 
+           placeholder="Enter your username" required style="<%= borderStyle %>">
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+          <input type="password" class="form-control" id="password" name="password" 
+          placeholder="Enter your password" required style="<%= borderStyle %>">
         </div>
 
         <button type="submit" class="btn btn-primary w-100">Login</button>

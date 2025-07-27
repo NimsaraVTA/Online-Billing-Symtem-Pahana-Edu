@@ -1,10 +1,168 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>My first Project</h1>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome | Pahana Edu Billing System</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    .main-container {
+      display: flex;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .left-section {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1050&q=80') no-repeat center center;
+      background-size: cover;
+    }
+
+    .right-section {
+      flex: 1;
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      animation: fadeInRight 1s ease-in-out;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 480px;
+      border: 1px solid #d0d0d0;
+      border-radius: 16px;
+      padding: 45px 35px;
+      background-color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      animation: slideUp 1s ease-in-out;
+    }
+
+    .login-box h2 {
+      font-weight: 600;
+      color: #1a237e;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .btn-primary {
+      background-color: #1a237e;
+      border-color: #1a237e;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0d1b60;
+    }
+
+    .form-text {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .signup-link a {
+      color: #0d47a1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .left-section {
+        height: 220px;
+      }
+
+      .login-box {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-container">
+  <!-- Left Image Section -->
+  <div class="left-section"></div>
+
+  <!-- Right Login Section -->
+  <div class="right-section">
+    <div class="login-box">
+      <h2>Welcome to Pahana Edu</h2>
+      <p class="form-text mb-4">Please login to access the billing system</p>
+      <form action="dashboard.html" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+
+        <div class="signup-link">
+          Don't have an account? <a href="signup.html">Sign up here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

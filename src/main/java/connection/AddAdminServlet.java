@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import org.bson.Document;
 
 @WebServlet("/addAdmin")
 public class AddAdminServlet extends HttpServlet {
@@ -23,20 +24,24 @@ public class AddAdminServlet extends HttpServlet {
         AdminDAO adminDAO = new AdminDAO();
 
         switch (action) {
-            case "add":
-                boolean added = adminDAO.addAdmin(name, email, password, designation, adminId);
-                if (added) {
-                    request.setAttribute("message", "Admin added successfully.");
-                } else {
-                    request.setAttribute("message", "Admin already exists with the same ID or email.");
-                }
-                break;
+        case "add":
+            boolean added = adminDAO.addAdmin(name, email, password, designation, adminId);
+            request.setAttribute("message", added ? "Admin added successfully." : "Admin already exists with the same ID or email.");
+            break;
 
-            // You can implement "update" and "delete" actions here later
-            default:
-                request.setAttribute("message", "Invalid action.");
-                break;
-        }
+        case "find":
+            Document admin = adminDAO.getAdminById(adminId);
+            if (admin != null) {
+                request.setAttribute("foundAdmin", admin);
+            } else {
+                request.setAttribute("message", "Admin not found with the given ID.");
+            }
+            break;
+
+        default:
+            request.setAttribute("message", "Invalid action.");
+            break;
+            }
 
         // Forward back to adminControl.jsp with feedback
         request.getRequestDispatcher("adminControl.jsp").forward(request, response);

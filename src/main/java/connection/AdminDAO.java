@@ -20,13 +20,8 @@ public class AdminDAO {
     }
 
     public boolean addAdmin(String name, String email, String password, String designation, String adminID) {
-        // Check if an admin with the same adminID or email already exists
         Document existingAdmin = adminCollection.find(
-            new Document("$or", 
-                java.util.Arrays.asList(
-                    new Document("adminID", adminID)
-                )
-            )
+            new Document("adminID", adminID)
         ).first();
 
         if (existingAdmin != null) {
@@ -41,5 +36,9 @@ public class AdminDAO {
 
         adminCollection.insertOne(newAdmin);
         return true;
+    }
+
+    public Document getAdminById(String adminID) {
+        return adminCollection.find(new Document("adminID", adminID)).first();
     }
 }

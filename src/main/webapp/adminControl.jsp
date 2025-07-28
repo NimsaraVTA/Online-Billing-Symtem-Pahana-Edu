@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="CSS/adminControl.css"/>
 </head>
 <body>
+      <%-- Notification Message from Servlet --%>
+        <% String message = (String) request.getAttribute("message"); %>
+        <% if (message != null) { %>
+            <div id="notificationBox" class="alert <%= message.contains("successfully") ? "alert-success" : "alert-danger" %> text-center" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -72,12 +79,12 @@
                 </div>
             </div>
         </div>
-
+          
         <!-- Right Column: Add/Update/Delete Form -->
         <div class="col-md-6">
-            <div class="section">
+            <div class="section <%= (message != null && !message.contains("successfully")) ? "error-border" : "" %>">
                 <h5>Manage Admin</h5>
-                <form method="post" action="AdminServlet">
+                <form method="post" action="addAdmin">
                     <!-- Admin ID Row with Find Button -->
                     <div class="mb-3">
                         <label class="form-label">Admin ID</label>
@@ -127,6 +134,16 @@
         document.querySelectorAll("#adminTable tbody tr").forEach(row => {
             row.style.display = row.innerText.toLowerCase().includes(query) ? "" : "none";
         });
+    });
+
+    // Auto-hide notification after 2 seconds
+    window.addEventListener('DOMContentLoaded', () => {
+        const notification = document.getElementById('notificationBox');
+        if (notification) {
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
     });
 </script>
 </body>

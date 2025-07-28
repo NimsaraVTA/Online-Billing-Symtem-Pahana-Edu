@@ -37,7 +37,14 @@
 </nav>
 
 <div class="container mt-4">
-    <h3 class="mb-4">Admin Dashboard</h3>
+    <div class="row align-items-center mb-3">
+        <div class="col-6">
+          <h3 class="mb-0">Admin Dashboard</h3>
+        </div>
+        <div class="col-6 text-end">
+            <a href="adminControl.jsp"><img src="images/setting.png" class="admin-setting" alt="admin setting logo" /></a>
+        </div>
+    </div>
 
     <!-- Dashboard Section -->
     <div id="dashboardSection" class="section text-dark">

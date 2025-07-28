@@ -1,15 +1,36 @@
- :root {
+        :root {
             --primary-blue: #0d6efd;
             --light-blue: #e7f1ff;
         }
 
         body {
             background-color: var(--light-blue);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .navbar-dark .navbar-nav .nav-link.active,
         .navbar-dark .navbar-nav .nav-link:hover {
             color: #ffc107;
+        }
+
+        /* Page header row */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .page-header h3 {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .page-header img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
         .section {
@@ -39,25 +60,30 @@
         }
 
         .search-bar {
-            background-color: #f1f9ff;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
         }
 
-        #dashboardSection {
+        /* Background image for admin list */
+        .admin-list-section {
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg/1200px-M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg');
             background-size: cover;
-            background-repeat: no-repeat;
             background-position: center;
-            color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        #dashboardSection .table-wrapper {
-            background-color: rgba(255, 255, 255, 0.97);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        .admin-list-section .section {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding-top: 10px; 
+            margin-top: 10px; 
+        }
+
+        .admin-table {
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .action-buttons {
@@ -66,20 +92,13 @@
             gap: 0.5rem;
         }
 
-        .dashboard-search {
-            margin: 1rem auto 2rem auto;
-            max-width: 400px;
+        .input-group .btn-find {
+            background-color: var(--primary-blue);
+            color: #fff;
         }
-
-        .dashboard-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            margin-bottom: 2rem;
+        .container-fluid{
+            padding-left: 30px;
         }
-        .admin-setting {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
+        .back-icon{
+            margin-right: 20px;
         }

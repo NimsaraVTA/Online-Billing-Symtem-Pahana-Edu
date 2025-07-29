@@ -85,7 +85,6 @@
         <div class="col-md-6">
             <div class="section <%= (message != null && !message.contains("successfully")) ? "error-border" : "" %>">
                 <h5>Manage Admin</h5>
-
                 <!-- Find Form -->
                 <form method="post" action="addAdmin" class="mb-3">
                     <label class="form-label">Admin ID</label>
@@ -95,27 +94,38 @@
                         <button type="submit" name="action" value="find" class="btn btn-find">Find</button>
                     </div>
                 </form>
+                <!-- Find Form -->
+               <form method="post" action="addAdmin">
+                    <div class="mb-3">
+                        <label class="form-label">New Admin ID</label>
+                        <input type="text" name="newAdminId" class="form-control" placeholder="Enter New Admin ID">
+                    </div>
 
-                <!-- Add/Update/Delete Form -->
-                <form method="post" action="addAdmin">
-                    <input type="hidden" name="adminId"
+                    <input type="hidden" name="adminId" placeholder="Enter New User Admin ID"
                            value="<%= foundAdmin != null ? foundAdmin.getString("adminID") : "" %>">
 
+                    <!-- Name -->
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" required
                                value="<%= foundAdmin != null ? foundAdmin.getString("name") : "" %>">
                     </div>
+
+                    <!-- Email -->
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" required
                                value="<%= foundAdmin != null ? foundAdmin.getString("email") : "" %>">
                     </div>
+
+                    <!-- Password -->
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" required
                                value="<%= foundAdmin != null ? foundAdmin.getString("password") : "" %>">
                     </div>
+
+                    <!-- Designation -->
                     <div class="mb-3">
                         <label class="form-label">Designation</label>
                         <select name="designation" class="form-select" required>
@@ -124,6 +134,8 @@
                             <option value="Staff" <%= (foundAdmin != null && "Staff".equals(foundAdmin.getString("designation"))) ? "selected" : "" %>>Staff</option>
                         </select>
                     </div>
+
+                    <!-- Buttons -->
                     <div class="action-buttons">
                         <button type="submit" name="action" value="add" class="btn btn-primary">Add</button>
                         <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>

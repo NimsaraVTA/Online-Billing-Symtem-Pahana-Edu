@@ -2,7 +2,6 @@ package connection;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
 public class AdminDAO {
@@ -44,18 +43,21 @@ public class AdminDAO {
     }
     
     public boolean updateAdmin(String adminID, String name, String email, String password, String designation) {
+    Document existing = adminCollection.find(new Document("adminID", adminID)).first();
+    if (existing == null) {
+        return false;
+    }
+
     Document updatedFields = new Document()
         .append("name", name)
         .append("email", email)
         .append("password", password)
         .append("designation", designation);
 
-    UpdateResult result = adminCollection.updateOne(
-        new Document("adminID", adminID),
-        new Document("$set", updatedFields)
-    );
+    Document updateQuery = new Document("$set", updatedFields);
 
-    return result.getModifiedCount() > 0;
+    adminCollection.updateOne(new Document("adminID", adminID), updateQuery);
+    return true;
 }
 
 }

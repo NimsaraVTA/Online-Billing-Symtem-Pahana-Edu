@@ -6,8 +6,6 @@
     <meta charset="UTF-8">
     <title>Admin Control - Pahana Edu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS/adminControl.css"/>
 </head>
@@ -15,16 +13,15 @@
 <%
     String message = (String) request.getAttribute("message");
     Document foundAdmin = (Document) request.getAttribute("foundAdmin");
+    boolean isEditing = (foundAdmin != null);
 %>
 
-<!-- Notification -->
 <% if (message != null) { %>
     <div id="notificationBox" class="alert <%= message.contains("successfully") ? "alert-success" : "alert-danger" %> text-center" role="alert">
         <%= message %>
     </div>
 <% } %>
 
-<!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Pahana Edu</a>
@@ -41,7 +38,6 @@
     </div>
 </nav>
 
-<!-- Content -->
 <div class="container-fluid mt-4">
     <div class="page-header">
         <h3>Admin Control Panel</h3>
@@ -85,6 +81,7 @@
         <div class="col-md-6">
             <div class="section <%= (message != null && !message.contains("successfully")) ? "error-border" : "" %>">
                 <h5>Manage Admin</h5>
+
                 <!-- Find Form -->
                 <form method="post" action="addAdmin" class="mb-3">
                     <label class="form-label">Admin ID</label>
@@ -94,15 +91,23 @@
                         <button type="submit" name="action" value="find" class="btn btn-find">Find</button>
                     </div>
                 </form>
-                <!-- Find Form -->
-               <form method="post" action="addAdmin">
-                    <div class="mb-3">
-                        <label class="form-label">New Admin ID</label>
-                        <input type="text" name="newAdminId" class="form-control" placeholder="Enter New Admin ID">
-                    </div>
 
-                    <input type="hidden" name="adminId" placeholder="Enter New User Admin ID"
-                           value="<%= foundAdmin != null ? foundAdmin.getString("adminID") : "" %>">
+                <!-- Add/Update/Delete Form -->
+                <form method="post" action="addAdmin">
+                    <% if (!isEditing) { %>
+                        <!-- Show New Admin ID field only for Add -->
+                        <div class="mb-3">
+                            <label class="form-label">New Admin ID</label>
+                            <input type="text" name="newAdminId" class="form-control" placeholder="Enter New Admin ID" required>
+                        </div>
+                    <% } else { %>
+                        <!-- For Update/Delete: Read-only display and hidden adminId -->
+                        <div class="mb-3">
+                            <label class="form-label">Admin ID</label>
+                            <input type="text" class="form-control" value="<%= foundAdmin.getString("adminID") %>" readonly>
+                            <input type="hidden" name="adminId" value="<%= foundAdmin.getString("adminID") %>">
+                        </div>
+                    <% } %>
 
                     <!-- Name -->
                     <div class="mb-3">
@@ -135,7 +140,7 @@
                         </select>
                     </div>
 
-                    <!-- Buttons -->
+                    <!-- Action Buttons -->
                     <div class="action-buttons">
                         <button type="submit" name="action" value="add" class="btn btn-primary">Add</button>
                         <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>
@@ -150,7 +155,6 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Filter table rows
     document.getElementById("adminSearch").addEventListener("keyup", function () {
         const query = this.value.toLowerCase();
         document.querySelectorAll("#adminTable tbody tr").forEach(row => {
@@ -158,7 +162,6 @@
         });
     });
 
-    // Auto-hide notification
     window.addEventListener('DOMContentLoaded', () => {
         const notification = document.getElementById('notificationBox');
         if (notification) {

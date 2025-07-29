@@ -58,6 +58,16 @@ public class AdminDAO {
 
     adminCollection.updateOne(new Document("adminID", adminID), updateQuery);
     return true;
-}
+    }
+    
+    public boolean deleteAdmin(String adminID) {
+    Document existing = adminCollection.find(new Document("adminID", adminID)).first();
+    if (existing == null) {
+        return false;
+    }
+
+    adminCollection.deleteOne(new Document("adminID", adminID));
+    return true;
+    }
 
 }

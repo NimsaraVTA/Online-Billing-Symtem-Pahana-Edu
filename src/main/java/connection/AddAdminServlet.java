@@ -47,10 +47,10 @@ public class AddAdminServlet extends HttpServlet {
             request.setAttribute("message", updated ? "Admin updated successfully." : "Failed to update admin.");
             break;
 
-//        case "delete":
-//            boolean deleted = adminDAO.deleteAdmin(adminId);
-//            request.setAttribute("message", deleted ? "Admin deleted successfully." : "Failed to delete admin.");
-//            break;
+        case "delete":
+            boolean deleted = adminDAO.deleteAdmin(adminId);
+            request.setAttribute("message", deleted ? "Admin deleted successfully." : "Failed to delete admin.");
+            break;
 
         default:
             request.setAttribute("message", "Invalid action.");

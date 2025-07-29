@@ -144,7 +144,7 @@
                     <div class="action-buttons">
                         <button type="submit" name="action" value="add" class="btn btn-primary">Add</button>
                         <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>
-                        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+                        <button id="deleteButton" type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
                     </div>
                 </form>
             </div>
@@ -170,6 +170,18 @@
             }, 2000);
         }
     });
+</script>
+<script>
+    // Confirm before delete
+    const deleteBtn = document.getElementById("deleteButton");
+    if (deleteBtn) {
+        deleteBtn.addEventListener("click", function (event) {
+            const confirmed = confirm("Are you sure you want to delete this admin?");
+            if (!confirmed) {
+                event.preventDefault(); // cancel form submission
+            }
+        });
+    }
 </script>
 </body>
 </html>

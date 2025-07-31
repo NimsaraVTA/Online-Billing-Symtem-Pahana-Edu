@@ -4,6 +4,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
+
 import org.bson.Document;
 
 @WebServlet("/addAdmin")
@@ -13,50 +15,53 @@ public class AddAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-    String action = request.getParameter("action");
+        String action = request.getParameter("action");
 
-    // First get both parameters
-    String adminId = request.getParameter("adminId");
-    String newAdminId = request.getParameter("newAdminId"); // NEW FIELD
+        // Both adminId and newAdminId are retrieved
+        String adminId = request.getParameter("adminId");
+        String newAdminId = request.getParameter("newAdminId"); // For adding new admins
 
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
-    String designation = request.getParameter("designation");
-    String targetAdminId = (newAdminId != null && !newAdminId.trim().isEmpty()) ? newAdminId : adminId;
-    
-    AdminDAO adminDAO = new AdminDAO();
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String designation = request.getParameter("designation");
 
-    switch (action) {
-        case "add":
-            boolean added = adminDAO.addAdmin(name, email, password, designation, targetAdminId);
-            request.setAttribute("message", added ? "Admin added successfully." : "Admin already exists with the same ID or email.");
-            break;
+        // Determine which ID to use (newAdminId if provided, otherwise adminId)
+        String targetAdminId = (newAdminId != null && !newAdminId.trim().isEmpty()) ? newAdminId : adminId;
 
-        case "find":
-            Document admin = adminDAO.getAdminById(adminId);
-            if (admin != null) {
-                request.setAttribute("foundAdmin", admin);
-            } else {
-                request.setAttribute("message", "Admin not found with the given ID.");
-            }
-            break;
-            
-        case "update":
-            boolean updated = adminDAO.updateAdmin(adminId, name, email, password, designation);
-            request.setAttribute("message", updated ? "Admin updated successfully." : "Failed to update admin.");
-            break;
+        AdminDAO adminDAO = new AdminDAO();
 
-        case "delete":
-            boolean deleted = adminDAO.deleteAdmin(adminId);
-            request.setAttribute("message", deleted ? "Admin deleted successfully." : "Failed to delete admin.");
-            break;
+        switch (action) {
+            case "add":
+                boolean added = adminDAO.addAdmin(name, email, password, designation, targetAdminId);
+                request.setAttribute("message", added ? "Admin added successfully." : "Admin already exists with the same ID or email.");
+                break;
 
-        default:
-            request.setAttribute("message", "Invalid action.");
-            break;
+            case "find":
+                Document admin = adminDAO.getAdminById(adminId);
+                if (admin != null) {
+                    request.setAttribute("foundAdmin", admin);
+                } else {
+                    request.setAttribute("message", "Admin not found with the given ID.");
+                }
+                break;
+
+            case "update":
+                boolean updated = adminDAO.updateAdmin(adminId, name, email, password, designation);
+                request.setAttribute("message", updated ? "Admin updated successfully." : "Failed to update admin.");
+                break;
+
+            case "delete":
+                boolean deleted = adminDAO.deleteAdmin(adminId);
+                request.setAttribute("message", deleted ? "Admin deleted successfully." : "Failed to delete admin.");
+                break;
+
+            default:
+                request.setAttribute("message", "Invalid action.");
+                break;
+        }
+        
+        request.getRequestDispatcher("adminControl.jsp").forward(request, response);
     }
-
-    request.getRequestDispatcher("adminControl.jsp").forward(request, response);
-}
+    
 }

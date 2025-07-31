@@ -1,5 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="org.bson.Document"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@page import="org.bson.Document, java.util.List" %>
+<%@ page import="connection.AdminDAO" %>
+<%@ page import="org.bson.Document" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +34,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav" id="navLinks">
                 <li class="nav-item"><a class="nav-link" href="adminDashboard.jsp">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link active" href="adminControl.jsp">Admin Control</a></li>
+                <li class="nav-item"><a class="nav-link active" href="adminData">Admin Control</a></li>
                 <li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
             </ul>
         </div>
@@ -39,9 +42,9 @@
 </nav>
 
 <div class="container-fluid mt-4">
-    <div class="page-header">
+    <div class="page-header d-flex align-items-center justify-content-between">
         <h3>Admin Control Panel</h3>
-        <img class="back-icon" src="images/back-button.png" alt="Back Icon">
+        <img class="back-icon" src="images/back-button.png" alt="Back Icon" style="cursor:pointer;" onclick="history.back();">
     </div>
 
     <div class="row mt-3">
@@ -52,27 +55,32 @@
                     <input type="text" class="form-control" id="adminSearch" placeholder="Search admin by name or email">
                 </div>
                 <div class="admin-table">
-                    <table class="table table-hover table-bordered table-sm" id="adminTable">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Designation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ThathsaraniB</td>
-                                <td>k9003.thathsarani@gmail.com</td>
-                                <td>Owner</td>
-                            </tr>
-                            <tr>
-                                <td>John Doe</td>
-                                <td>john@example.com</td>
-                                <td>Manager</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <%
+                    AdminDAO adminDAO = new AdminDAO();
+                    List<Document> admins = adminDAO.getAllAdmins();
+                %>
+                <table class="table table-hover table-bordered table-sm" id="adminTable">
+                   <thead>
+                           <tr>
+                               <th>Admin Name</th>
+                               <th>Email</th>
+                               <th>Designation</th>
+                           </tr>
+                   </thead>
+                   <tbody>
+                           <%
+                               for (Document admin : admins) {
+                           %>
+                           <tr>
+                               <td><%= admin.getString("name") %></td>
+                               <td><%= admin.getString("email") %></td>
+                               <td><%= admin.getString("designation") %></td>
+                           </tr>
+                           <%
+                               }
+                           %>
+                   </tbody>
+                </table>
                 </div>
             </div>
         </div>
@@ -170,8 +178,7 @@
             }, 2000);
         }
     });
-</script>
-<script>
+
     // Confirm before delete
     const deleteBtn = document.getElementById("deleteButton");
     if (deleteBtn) {

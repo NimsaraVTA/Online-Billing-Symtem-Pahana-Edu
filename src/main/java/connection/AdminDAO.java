@@ -2,6 +2,8 @@ package connection;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 
 public class AdminDAO {
@@ -41,33 +43,37 @@ public class AdminDAO {
     public Document getAdminById(String adminID) {
         return adminCollection.find(new Document("adminID", adminID)).first();
     }
-    
+
     public boolean updateAdmin(String adminID, String name, String email, String password, String designation) {
-    Document existing = adminCollection.find(new Document("adminID", adminID)).first();
-    if (existing == null) {
-        return false;
+        Document existing = adminCollection.find(new Document("adminID", adminID)).first();
+        if (existing == null) {
+            return false;
+        }
+
+        Document updatedFields = new Document()
+            .append("name", name)
+            .append("email", email)
+            .append("password", password)
+            .append("designation", designation);
+
+        Document updateQuery = new Document("$set", updatedFields);
+
+        adminCollection.updateOne(new Document("adminID", adminID), updateQuery);
+        return true;
     }
 
-    Document updatedFields = new Document()
-        .append("name", name)
-        .append("email", email)
-        .append("password", password)
-        .append("designation", designation);
+    public boolean deleteAdmin(String adminID) {
+        Document existing = adminCollection.find(new Document("adminID", adminID)).first();
+        if (existing == null) {
+            return false;
+        }
 
-    Document updateQuery = new Document("$set", updatedFields);
-
-    adminCollection.updateOne(new Document("adminID", adminID), updateQuery);
-    return true;
+        adminCollection.deleteOne(new Document("adminID", adminID));
+        return true;
     }
     
-    public boolean deleteAdmin(String adminID) {
-    Document existing = adminCollection.find(new Document("adminID", adminID)).first();
-    if (existing == null) {
-        return false;
-    }
-
-    adminCollection.deleteOne(new Document("adminID", adminID));
-    return true;
-    }
+    public List<Document> getAllAdmins() {
+    return adminCollection.find().into(new ArrayList<>());
+}
 
 }

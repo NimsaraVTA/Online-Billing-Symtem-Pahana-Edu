@@ -25,8 +25,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav" id="navLinks">
-                <li class="nav-item"><a class="nav-link active" data-section="dashboardSection">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" data-section="customerForm">Customers</a></li>
+                <li class="nav-item"><a class="nav-link active" href="adminDashboard.jsp">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="customerControl.jsp">Customers</a></li>
                 <li class="nav-item"><a class="nav-link" data-section="itemForm">Items</a></li>
                 <li class="nav-item"><a class="nav-link" data-section="billingForm">Billing</a></li>
                 <li class="nav-item"><a class="nav-link" data-section="helpSection">Help</a></li>

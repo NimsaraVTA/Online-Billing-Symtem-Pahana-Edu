@@ -27,9 +27,9 @@
             <ul class="navbar-nav" id="navLinks">
                 <li class="nav-item"><a class="nav-link active" href="adminDashboard.jsp">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="customerControl.jsp">Customers</a></li>
-                <li class="nav-item"><a class="nav-link" data-section="itemDashboard.jsp">Items</a></li>
-                <li class="nav-item"><a class="nav-link" data-section="billingForm">Billing</a></li>
-                <li class="nav-item"><a class="nav-link" data-section="helpSection">Help</a></li>
+                <li class="nav-item"><a class="nav-link" href="itemDashboard.jsp">Items</a></li>
+                <li class="nav-item"><a class="nav-link" href="billing.jsp">Billing</a></li>
+                <li class="nav-item"><a class="nav-link" href="helpSection">Help</a></li>
                 <li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
             </ul>
         </div>

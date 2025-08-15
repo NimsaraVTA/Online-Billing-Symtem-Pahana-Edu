@@ -1,0 +1,124 @@
+:root {
+    --primary-blue: #0d6efd;
+    --light-blue: #e7f1ff;
+}
+
+body {
+    background-color: var(--light-blue);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffc107;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Page header row */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+     
+
+.item-list-section{
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg/1200px-M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+/* Section Container */
+.section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+/* Headings */
+h3 {
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+/* Table Styling */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--primary-blue);
+    color: #fff;
+    text-align: center;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Form Controls */
+.form-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 8px;
+}
+
+/* Buttons */
+.btn-primary, .btn-info, .btn-warning, .btn-danger {
+            border-radius: 8px;
+            font-weight: 600;
+}
+
+/* Alerts */
+.alert {
+    padding: 15px;
+    margin: 15px auto;
+    border-radius: 10px;
+    width: 60%;
+    font-weight: bold;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+ .container-fluid{
+            padding-left: 30px;
+            padding-right: 20px;
+        }
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .alert {
+        width: 90%;
+    }
+}

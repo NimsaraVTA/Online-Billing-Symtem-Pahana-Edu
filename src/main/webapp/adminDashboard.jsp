@@ -3,6 +3,9 @@
     Created on : Jul 27, 2025, 2:17:36 PM
     Author     : ThathsaraniBandara
 --%>
+<%@page import="java.util.List"%>
+<%@page import="org.bson.Document"%>
+<%@page import="connection.AdminDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +17,36 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS/adminDashboard.css">
+    <style>
+        .table-wrapper {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-top: 15px;
+        }
+
+        #adminTable th {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+        }
+
+        #adminTable td {
+            vertical-align: middle;
+        }
+
+        #adminTable tr:hover {
+            background-color: #f1f1f1;
+        }
+        .info-section {
+            margin-top: 40px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 6px;
+        }
+    </style>
 </head>
 <body>
 <!-- Navigation Bar -->
@@ -48,43 +81,39 @@
 
     <!-- Dashboard Section -->
     <div id="dashboardSection" class="section text-dark">
-        <h5 class="mb-3">Customer Overview</h5>
+        <h5 class="mb-3">Admin Overview</h5>
 
         <div class="dashboard-search">
             <input type="text" class="form-control" id="dashboardSearchInput" placeholder="Search by Account Number or Name...">
         </div>
 
         <div class="table-wrapper">
-            <table class="table table-hover table-bordered" id="customerTable">
-                <thead class="table-primary">
-                    <tr>
-                        <th>Account No</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1001</td>
-                        <td>Sri Wijeratne</td>
-                        <td>Colombo 03</td>
-                        <td>0771234567</td>
-                    </tr>
-                    <tr>
-                        <td>1002</td>
-                        <td>Chamila Silva</td>
-                        <td>Gampaha</td>
-                        <td>0719876543</td>
-                    </tr>
-                    <tr>
-                        <td>1003</td>
-                        <td>Nimal Perera</td>
-                        <td>Kandy</td>
-                        <td>0701112233</td>
-                    </tr>
-                </tbody>
-            </table>
+            <%
+                    AdminDAO adminDAO = new AdminDAO();
+                    List<Document> admins = adminDAO.getAllAdmins();
+                %>
+                <table class="table table-hover table-bordered table-sm" id="adminTable">
+                   <thead>
+                           <tr>
+                               <th>Admin Name</th>
+                               <th>Email</th>
+                               <th>Designation</th>
+                           </tr>
+                   </thead>
+                   <tbody>
+                           <%
+                               for (Document admin : admins) {
+                           %>
+                           <tr>
+                               <td><%= admin.getString("name") %></td>
+                               <td><%= admin.getString("email") %></td>
+                               <td><%= admin.getString("designation") %></td>
+                           </tr>
+                           <%
+                               }
+                           %>
+                   </tbody>
+                </table>
         </div>
     </div>
 
@@ -164,9 +193,10 @@
     </div>
 
     <!-- Help Section -->
-    <div id="helpSection" class="section" style="display:none;">
-        <h5>Help</h5>
-        <p>This dashboard allows administrators to manage customer accounts, item listings, and generate bills. For technical assistance, contact the IT support team.</p>
+   <div class="info-section">
+        <h6>ℹ️ Dashboard Information</h6>
+        <p>This section provides an overview of all administrators in the system. 
+           Use the navigation menu to manage customers, items, and billing records.</p>
     </div>
 </div>
 

@@ -1,0 +1,56 @@
+:root {
+    --nav-bg: #2c3e50;           /* Dark navy/charcoal for navbar */
+    --nav-hover: #bdc3c7;        /* Light gray accent for hover */
+    --body-bg: #f5f6fa;          /* Soft off-white page background */
+    --card-bg: #ffffff;           /* White cards */
+    --card-border: #dcdde1;       /* Subtle card border */
+    --card-header-bg: #ecf0f1;    /* Light gray card header */
+    --text-color: #2c3e50;        /* Dark text for readability */
+    --text-muted: #636e72;        /* Muted text for descriptions */
+}
+
+body {
+    background-color: var(--body-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+}
+
+.navbar-dark {
+    background-color: var(--nav-bg);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--nav-hover);
+}
+
+h2 {
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: var(--card-header-bg);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.card-body p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}

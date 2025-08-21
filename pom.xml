@@ -18,6 +18,12 @@
     
     <dependencies>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${jakartaee}</version>
@@ -27,6 +33,29 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
             <version>4.11.1</version>
+        </dependency>
+        <!-- JUnit 4 -->
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.13.2</version>
+          <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-core</artifactId>
+          <version>5.8.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- Servlet API (provided by the server at runtime) -->
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>4.0.1</version>
+          <scope>provided</scope>
         </dependency>
 
     </dependencies>
@@ -78,6 +107,14 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M9</version>
+            <configuration>
+                <useModulePath>false</useModulePath>
+            </configuration>
+            </plugin>        
+          </plugins>
     </build>
 </project>

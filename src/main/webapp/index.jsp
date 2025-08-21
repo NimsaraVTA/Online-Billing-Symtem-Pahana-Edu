@@ -64,7 +64,7 @@
         <button type="submit" class="btn btn-primary w-100">Login</button>
 
         <div class="signup-link">
-          Don't have an account? <a href="signup.html">Sign up here</a>
+          Forgot password? <a href="signup.html">Reset from here</a>
         </div>
       </form>
     </div>

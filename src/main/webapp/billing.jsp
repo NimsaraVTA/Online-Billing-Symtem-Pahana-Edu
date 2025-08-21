@@ -37,6 +37,7 @@
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/billing.css">
 
     <style>
         :root { --light-blue:#f4f8ff; }
@@ -54,6 +55,7 @@
         .receipt table{ width:100%; }
         .receipt .lh-condensed { line-height:1.25; }
     </style>
+    
 </head>
 <body>
 
@@ -66,8 +68,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="adminDashboard.jsp">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="billing.jsp">Billing</a></li>
+                <li class="nav-item"><a class="nav-link" href="adminDashboard.jsp">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="billing.jsp">Billing Management</a></li>
                 <li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
             </ul>
         </div>

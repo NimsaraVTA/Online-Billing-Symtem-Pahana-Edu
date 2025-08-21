@@ -28,4 +28,8 @@ public class LoginServlet extends HttpServlet {
              request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
+    
+     public AdminDAO getAdminDAO() {
+        return new AdminDAO();
+    }
 }
